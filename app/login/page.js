@@ -1,37 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function Home() {
+  const { data: session } = useSession();
 
-  async function handleLogin() {
+  if (session) {
+    return (
+      <>
+        <h1>Welcome {session.user.name}</h1>
 
-    await fetch("/api/login",{
-      method:"POST",
-      body:JSON.stringify({email,password})
-    });
-
-    window.location="/dashboard";
+        <button onClick={() => signOut()}>
+          Logout
+        </button>
+      </>
+    );
   }
 
   return (
-    <>
-      <input
-        placeholder="Email"
-        onChange={(e)=>setEmail(e.target.value)}
-      />
-
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e)=>setPassword(e.target.value)}
-      />
-
-      <button onClick={handleLogin}>
-        Login
-      </button>
-    </>
+    <button onClick={() => signIn("github")}>
+      Login with GitHub
+    </button>
   );
 }
