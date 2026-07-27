@@ -8,39 +8,45 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+
         <header
           style={{
-            padding: "20px",
+            display: "flex",
+            alignItems: "center",
+            gap: "15px",
+            padding: "15px",
             background: "#222",
+            color: "white",
           }}
         >
-          <Link
-            href="/"
-            style={{ color: "white", marginRight: "20px" }}
-          >
-            Home
-          </Link>
+          <img
+            src="/logo.png"
+            alt="Logo"
+            width="50"
+            height="50"
+          />
 
-          <Link
-            href="/products"
-            style={{ color: "white" }}
-          >
-            Products
-          </Link>
+          <nav>
+            <Link
+              href="/"
+              style={{ color: "white", marginRight: "20px" }}
+            >
+              Home
+            </Link>
+
+            <Link
+              href="/products"
+              style={{ color: "white" }}
+            >
+              Products
+            </Link>
+          </nav>
         </header>
 
         <main style={{ padding: "20px" }}>
           {children}
         </main>
 
-        <footer
-          style={{
-            padding: "20px",
-            textAlign: "center",
-          }}
-        >
-          © 2026 Products Store
-        </footer>
       </body>
     </html>
   );
