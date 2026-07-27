@@ -1,15 +1,31 @@
+async function getProduct(id) {
+  const res = await fetch(`https://dummyjson.com/products/${id}`);
+
+  if (!res.ok) {
+    throw new Error("Product not found");
+  }
+
+  return res.json();
+}
+
 export default async function ProductPage({ params }) {
   const { id } = await params;
 
+  const product = await getProduct(id);
+
   return (
-    <div
-      style={{
-        border: "2px solid black",
-        padding: "20px",
-        display: "inline-block",
-      }}
-    >
-      <h2>Product {id} details page — content coming soon!</h2>
+    <div>
+      <h1>{product.title}</h1>
+
+      <img
+        src={product.thumbnail}
+        alt={product.title}
+        width={250}
+      />
+
+      <p>{product.description}</p>
+
+      <h3>Price: ${product.price}</h3>
     </div>
   );
 }

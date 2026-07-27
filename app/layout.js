@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "Products Store",
-  description: "Next.js Layout Assignment",
 };
 
 export default function RootLayout({ children }) {
@@ -9,29 +10,32 @@ export default function RootLayout({ children }) {
       <body>
         <header
           style={{
-            background: "#2563eb",
-            color: "white",
-            padding: "15px",
-            textAlign: "center",
+            padding: "20px",
+            background: "#222",
           }}
         >
-          <h1>Products Store</h1>
+          <Link
+            href="/"
+            style={{ color: "white", marginRight: "20px" }}
+          >
+            Home
+          </Link>
+
+          <Link
+            href="/products"
+            style={{ color: "white" }}
+          >
+            Products
+          </Link>
         </header>
 
-        <main
-          style={{
-            minHeight: "80vh",
-            padding: "20px",
-          }}
-        >
+        <main style={{ padding: "20px" }}>
           {children}
         </main>
 
         <footer
           style={{
-            background: "#111827",
-            color: "white",
-            padding: "15px",
+            padding: "20px",
             textAlign: "center",
           }}
         >
