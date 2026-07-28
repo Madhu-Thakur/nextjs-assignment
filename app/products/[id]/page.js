@@ -1,3 +1,13 @@
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const product = await getProduct(id);
+
+  return {
+    title: `${product.title} - Products Store`,
+    description: product.description
+  };
+}
+
 async function getProduct(id) {
   const res = await fetch(`https://dummyjson.com/products/${id}`);
 

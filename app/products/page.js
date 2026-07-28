@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Products Store - Products List",
+  description: "Explore our complete catalog of products. Find the best deals and latest arrivals."
+};
+
 import Link from "next/link";
 
 async function getProducts() {

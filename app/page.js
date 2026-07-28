@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "This is Homepage",
-  description: "A simple Next.js website demonstrating static and dynamic metadata."
+  title: "Products Store - Home",
+  description: "Welcome to the Products Store. Browse our amazing collection of products."
 };
 
 export default function Home() {
