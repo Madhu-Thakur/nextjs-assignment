@@ -1,25 +1,57 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
-  const { data: session } = useSession();
+export default function LoginPage() {
+  const router = useRouter();
 
-  if (session) {
-    return (
-      <>
-        <h1>Welcome {session.user.name}</h1>
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-        <button onClick={() => signOut()}>
-          Logout
-        </button>
-      </>
-    );
+  async function handleLogin(e) {
+    e.preventDefault();
+
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    if (res.ok) {
+      router.push("/products");
+    } else {
+      alert("Invalid Credentials");
+    }
   }
 
   return (
-    <button onClick={() => signIn("github")}>
-      Login with GitHub
-    </button>
+    <form onSubmit={handleLogin}>
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      <br />
+
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <br />
+
+      <button type="submit">
+        Login
+      </button>
+    </form>
   );
 }
